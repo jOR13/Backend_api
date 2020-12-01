@@ -34,7 +34,8 @@ namespace API_BC.Controllers
             return Ok(user);
         }
 
-        [Route("login")]
+       
+        [Route("api/users/login")]
         public bool PostuserLog(user user)
         {
             bool logueado = false;
@@ -83,7 +84,6 @@ namespace API_BC.Controllers
 
         // POST: api/users
         [ResponseType(typeof(user))]
-        [Route("")]
         public IHttpActionResult Postuser(user user)
         {
             if (!ModelState.IsValid)
