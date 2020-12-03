@@ -9,11 +9,12 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nombre" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="email" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="password" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="status" Type="bool" />
+          <Property Name="picture" Type="longtext" />
         </EntityType>
         <EntityContainer Name="bcModelStoreContainer">
           <EntitySet Name="users" EntityType="Self.users" Schema="bc" store:Type="Tables" />
@@ -27,11 +28,12 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nombre" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="email" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="password" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="status" Type="Boolean" />
+          <Property Name="picture" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityContainer Name="bcEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="users" EntityType="Self.user" />
@@ -50,6 +52,7 @@
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="picture" ColumnName="picture" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

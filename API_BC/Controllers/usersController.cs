@@ -9,6 +9,8 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using API_BC.Models;
+using System.IO;
+using System.Web;
 
 namespace API_BC.Controllers
 {
@@ -34,17 +36,38 @@ namespace API_BC.Controllers
             return Ok(user);
         }
 
-       
+        //[Route("api/users/login")]
+        //public bool postuserlog(user user)
+        //{
+        //    bool logueado = false;
+        //    user = db.users.where(u => u.email.equals(user.email) && u.password.equals(user.password)).firstordefault();
+
+
+
+        //    if (user != null)
+        //    {
+        //        logueado = true;
+        //    }
+        //    return logueado;
+        //}
+
+
         [Route("api/users/login")]
-        public bool PostuserLog(user user)
+        public object PostuserLog(user user)
         {
             bool logueado = false;
             user = db.users.Where(u => u.email.Equals(user.email) && u.password.Equals(user.password)).FirstOrDefault();
+
+
+
             if (user != null)
             {
                 logueado = true;
             }
-            return logueado;
+
+            user.status = true;
+
+            return Json(user);
         }
 
         // PUT: api/users/5
@@ -90,6 +113,15 @@ namespace API_BC.Controllers
             {
                 return BadRequest(ModelState);
             }
+
+            string imageBase64 = user.picture.ToString();
+
+            HttpContext context = HttpContext.Current;
+            string localPath = context.Server.MapPath(@"\Content\Images\");
+
+            File.WriteAllBytes(localPath+user.nombre+"-"+user.email+".png", Convert.FromBase64String(imageBase64));
+
+            user.picture = user.nombre + "-" + user.email + ".png";
 
             db.users.Add(user);
 
